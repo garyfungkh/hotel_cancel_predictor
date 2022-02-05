@@ -1,26 +1,30 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-df = pd.read_csv("https://drive.google.com/u/1/uc?id=17a2cEAPpkQc7hXwnmBr4_6xSAbSmNsMp&export=download")
-df
+from flask import Flask
+app = Flask(__name__)
 
-X_train, X_test, y_train, y_test = train_test_split(df[["lead_time",'stays_in_week_nights']],df["is_canceled"], test_size=0.5, random_state=None, shuffle=True, stratify=None)
+@app.route('/')
+def hotel():
+	param_hotel = 'City Hotel'
+	param_month = '2'
+	param_num = 12
+	
+	import pickle
+	import numpy as np
 
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
+	with open('exported_one_hot.pickle', 'wb') as fp:
+		pickle.load(enc, fp)
 
-# Your code here
-from sklearn.naive_bayes import GaussianNB
-gnb = GaussianNB()
-y_pred = gnb.fit(X_train, y_train).predict(X_test)
-print("Number of mislabeled points out of a total %d points : %d"%(X_test.shape[0], (y_test != y_pred).sum()))
+	with open('exported_classifier.pickle', 'wb') as fp:
+		pickle.load(classifier, fp)
+	
+	hotel_feature = enc.transform([['City Hotel']]).toarray()
+	month_feature = (int(param_month)>= 6) and (int(parm_month) <=8)
+	
+	features = np.hstack([
+	hotel_feature,
+	np.array([[month_feature]]),
+	np.array([][param_num])
+	
+	])
+	classifier.predict(feature)
 
-#accurance
-(y_pred == y_test).sum()
-(y_pred == y_test).mean()
-
-from sklearn.linear_model import LogisticRegression
-model = LogisticRegression()
-model.fit(X_train,y_train)
-model.predict_proba(X_test)
-
-from sklearn.metrics import roc_curve, auc
-fpr, tpr, _ = roc_curve(y_test.values, y_pred[:,1])
+hotel()

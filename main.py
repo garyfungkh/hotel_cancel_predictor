@@ -1,11 +1,20 @@
 from flask import Flask
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods['GET','POST'])
 def hotel():
-	param_hotel = 'City Hotel'
-	param_month = '2'
-	param_num = 12
+	
+	param_hotel = request.form.get("hotel_type")
+	param_month = request.form.get("arrival_month")
+	param_num = request.form.get("number_of_people")
+
+	if param_hotel is None:
+		return "Please provide hotel type"
+	if param_month is None:
+		return "Please provide arrival month"
+	if param_num is None:
+		return "Please provide number of resident"
+	
 	
 	import pickle
 	import numpy as np

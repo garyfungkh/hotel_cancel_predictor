@@ -25,6 +25,5 @@ def hotel():
 	np.array([][param_num])
 	
 	])
-	classifier.predict(feature)
+	return classifier.predict(feature)
 
-hotel()

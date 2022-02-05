@@ -25,5 +25,8 @@ def hotel():
 	np.array([[param_num]])
 	
 	])
-	classifier.predict(feature)
+	if classifier.predict(features):
+		return 'will not cancel'
+	else:
+		return 'will cancel'
 

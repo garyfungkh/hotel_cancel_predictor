@@ -1,10 +1,7 @@
 FROM python:3.9-bullseye
-
-RUN pip install -r requirement.txt
-
-COPY requirement.txt requirement.txt
-COPY api_app/main.py main.py
-COPY api_app/exported_classifier.pickle exported_classifier.pickle
-COPY api_app/exported_one_hot.pickle exported_one_hot.pickle
-
-CMD ["python3", "main.py"]
+WORKDIR /api_app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
+ENV FLASK_APP=main
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

@@ -1,4 +1,8 @@
 from flask import Flask
+from flask import request
+import pickle
+import numpy as np
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
@@ -15,9 +19,7 @@ def hotel():
 	if param_num is None:
 		return "Please provide number of resident"
 	
-	
-	import pickle
-	import numpy as np
+
 
 	with open('exported_one_hot.pickle', 'rb') as fp:
 		enc = pickle.load(fp)
